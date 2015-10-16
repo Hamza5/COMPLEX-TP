@@ -1,25 +1,36 @@
 package miniproject1.prime;
 
-abstract public class PrimeNumberAlgorithm implements Runnable{
+import javax.swing.SwingWorker;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import miniproject1.AlgorithmsProgressWindow;
+
+abstract public class PrimeNumberAlgorithm extends SwingWorker<Boolean, Double> implements PropertyChangeListener{
     protected boolean prime;
-    protected boolean executed;
     protected double number;
     protected String name;
-    PrimeNumberAlgorithm(double number){
+    protected AlgorithmsProgressWindow progressWindow;
+    protected long elapsedTime;
+    PrimeNumberAlgorithm(double number, AlgorithmsProgressWindow progressWindow){
         super();
         this.prime = true;
-        this.executed = false;
         this.number = number;
-    }
-    public boolean isPrime(){
-        if(!executed) run();
-        return prime;
-    }
-    public String getName(){
-        return name;
+        this.progressWindow = progressWindow;
+        addPropertyChangeListener(this);
     }
     @Override
     public String toString(){
         return name;
+    }
+    @Override
+    protected void done(){
+        setProgress(100);
+        progressWindow.setResult(name, prime, elapsedTime);
+    }
+    @Override
+    public void propertyChange(PropertyChangeEvent evt){
+        if(evt.getPropertyName().equals("progress")){
+            progressWindow.setProgress(name, (int)evt.getNewValue());
+        }
     }
 }
