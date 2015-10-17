@@ -3,7 +3,7 @@ package miniproject1.prime;
 import miniproject1.AlgorithmsProgressWindow;
 
 public class PrimeNumberAlgorithm6 extends PrimeNumberAlgorithm {
-    public PrimeNumberAlgorithm6(double number,  AlgorithmsProgressWindow progressWindow) {
+    public PrimeNumberAlgorithm6(long number,  AlgorithmsProgressWindow progressWindow) {
         super(number, progressWindow);
         name = "Algorithme 6";
     }
@@ -12,9 +12,9 @@ public class PrimeNumberAlgorithm6 extends PrimeNumberAlgorithm {
         elapsedTime = System.currentTimeMillis();
         if(number != 2 && number % 2 == 0) prime = false;
         else if(number != 2){
-            double i = 3;
+            long i = 3;
             while(i <= Math.sqrt(number) && prime){
-                setProgress(Double.valueOf(Math.floor(i / Math.sqrt(number) * 100)).intValue());
+                setProgress(Double.valueOf(i / Math.sqrt(number) * 100).intValue());
                 if(number % i == 0) prime = false;
                 else i += 2;
             }

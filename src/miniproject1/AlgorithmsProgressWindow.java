@@ -7,10 +7,13 @@ import javax.swing.Box;
 import javax.swing.JProgressBar;
 import javax.swing.JLabel;
 import javax.swing.BorderFactory;
+import javax.swing.SwingUtilities;
 import java.awt.Dimension;
-import java.util.concurrent.ExecutionException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class AlgorithmsProgressWindow extends JFrame {
     JProgressBar algorithm1ProgressBar;
@@ -19,6 +22,7 @@ public class AlgorithmsProgressWindow extends JFrame {
     JProgressBar algorithm4ProgressBar;
     JProgressBar algorithm5ProgressBar;
     JProgressBar algorithm6ProgressBar;
+    JProgressBar totalProgressBar;
     JLabel algorithm1ElapsedTimeLabel;
     JLabel algorithm2ElapsedTimeLabel;
     JLabel algorithm3ElapsedTimeLabel;
@@ -29,6 +33,15 @@ public class AlgorithmsProgressWindow extends JFrame {
         super();
         Box mainBox =  Box.createVerticalBox();
         mainBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+        totalProgressBar = new JProgressBar();
+        totalProgressBar.setStringPainted(true);
+        Box totalProgressBox = Box.createHorizontalBox();
+//        totalProgressBox.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
+        totalProgressBox.add(totalProgressBar);
+        mainBox.add(Box.createVerticalStrut(5));
+        mainBox.add(totalProgressBar);
+        mainBox.add(Box.createVerticalStrut(10));
 
         Box algorithm1Box = Box.createHorizontalBox();
         algorithm1Box.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
@@ -143,6 +156,15 @@ public class AlgorithmsProgressWindow extends JFrame {
             case "Algorithme 3":
                 algorithm3ProgressBar.setValue(progress);
                 break;
+            case "Algorithme 4":
+                algorithm4ProgressBar.setValue(progress);
+                break;
+            case "Algorithme 5":
+                algorithm5ProgressBar.setValue(progress);
+                break;
+            case "Algorithme 6":
+                algorithm6ProgressBar.setValue(progress);
+                break;
         }
     }
     public void setResult(String algorithmName, boolean prime, long elapsedTime){
@@ -186,8 +208,8 @@ public class AlgorithmsProgressWindow extends JFrame {
                 break;
         }
     }
-    public void start(double number){
-        setTitle(String.format("%.0f", number));
+    public ExecutorService start(long number){
+        setTitle(String.format("Teste de la primalité de %d", number));
         ExecutorService executor = Executors.newSingleThreadExecutor();
         PrimeNumberAlgorithm algorithm1 = new PrimeNumberAlgorithm1(number, this);
         executor.submit(algorithm1);
@@ -202,5 +224,67 @@ public class AlgorithmsProgressWindow extends JFrame {
         PrimeNumberAlgorithm algorithm6 = new PrimeNumberAlgorithm6(number, this);
         executor.submit(algorithm6);
         executor.shutdown();
+        return executor;
+    }
+    public void start(final ArrayList<Long> numbers){
+        final int tasksCount = numbers.size();
+        totalProgressBar.setMaximum(tasksCount);
+        final AlgorithmsProgressWindow progressWindow = this;
+        (new Thread(){
+            @Override
+            public void run() {
+                try{
+                    for(long number : numbers){
+                        SwingUtilities.invokeAndWait(new Runnable() {
+                            @Override
+                            public void run() {
+                                resetAll();
+                                int newValue = totalProgressBar.getValue() + 1;
+                                totalProgressBar.setValue(newValue);
+                                totalProgressBar.setString(String.format("Nombre %d sur %d", newValue, tasksCount));
+                            }
+                        });
+                        ExecutorService executor = progressWindow.start(number);
+                        executor.awaitTermination(1, TimeUnit.DAYS);
+                        Thread.sleep(1000);
+                    }
+                    SwingUtilities.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            totalProgressBar.setString("Terminé");
+                            setTitle("Teste de primalité terminé");
+                            resetAll();
+                        }
+                    });
+                } catch(InterruptedException | InvocationTargetException ex){
+                    ex.printStackTrace();
+                }
+            }
+        }).start();
+    }
+    public void resetAll(){
+        algorithm1ProgressBar.setString(null);
+        algorithm1ProgressBar.setValue(0);
+        algorithm1ElapsedTimeLabel.setText("...");
+
+        algorithm2ProgressBar.setString(null);
+        algorithm2ProgressBar.setValue(0);
+        algorithm2ElapsedTimeLabel.setText("...");
+
+        algorithm3ProgressBar.setString(null);
+        algorithm3ProgressBar.setValue(0);
+        algorithm3ElapsedTimeLabel.setText("...");
+
+        algorithm4ProgressBar.setString(null);
+        algorithm4ProgressBar.setValue(0);
+        algorithm4ElapsedTimeLabel.setText("...");
+
+        algorithm5ProgressBar.setString(null);
+        algorithm5ProgressBar.setValue(0);
+        algorithm5ElapsedTimeLabel.setText("...");
+
+        algorithm6ProgressBar.setString(null);
+        algorithm6ProgressBar.setValue(0);
+        algorithm6ElapsedTimeLabel.setText("...");
     }
 }

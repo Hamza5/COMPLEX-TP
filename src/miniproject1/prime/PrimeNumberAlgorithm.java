@@ -5,18 +5,19 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import miniproject1.AlgorithmsProgressWindow;
 
-abstract public class PrimeNumberAlgorithm extends SwingWorker<Boolean, Double> implements PropertyChangeListener{
+abstract public class PrimeNumberAlgorithm extends SwingWorker<Boolean, Long> implements PropertyChangeListener{
     protected boolean prime;
-    protected double number;
+    protected long number;
     protected String name;
     protected AlgorithmsProgressWindow progressWindow;
     protected long elapsedTime;
-    PrimeNumberAlgorithm(double number, AlgorithmsProgressWindow progressWindow){
+    PrimeNumberAlgorithm(long number, AlgorithmsProgressWindow progressWindow){
         super();
         this.prime = true;
         this.number = number;
         this.progressWindow = progressWindow;
         addPropertyChangeListener(this);
+        setProgress(0);
     }
     @Override
     public String toString(){
@@ -30,7 +31,8 @@ abstract public class PrimeNumberAlgorithm extends SwingWorker<Boolean, Double> 
     @Override
     public void propertyChange(PropertyChangeEvent evt){
         if(evt.getPropertyName().equals("progress")){
-            progressWindow.setProgress(name, (int)evt.getNewValue());
+            int progress = (int)evt.getNewValue();
+            progressWindow.setProgress(name, progress);
         }
     }
 }
