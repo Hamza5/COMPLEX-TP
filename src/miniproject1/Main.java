@@ -10,8 +10,6 @@ public class Main {
             if(args.length != 1) throw new IllegalArgumentException();
             final double number = Double.parseDouble(args[0]);
             if(number < 0) throw new NumberFormatException();
-            System.out.printf("Nombre = %d%n", Double.valueOf(number).intValue());
-            System.out.println("Lancement des algorithmes...");
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {

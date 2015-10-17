@@ -15,8 +15,16 @@ import java.util.concurrent.Executors;
 public class AlgorithmsProgressWindow extends JFrame {
     JProgressBar algorithm1ProgressBar;
     JProgressBar algorithm2ProgressBar;
+    JProgressBar algorithm3ProgressBar;
+    JProgressBar algorithm4ProgressBar;
+    JProgressBar algorithm5ProgressBar;
+    JProgressBar algorithm6ProgressBar;
     JLabel algorithm1ElapsedTimeLabel;
     JLabel algorithm2ElapsedTimeLabel;
+    JLabel algorithm3ElapsedTimeLabel;
+    JLabel algorithm4ElapsedTimeLabel;
+    JLabel algorithm5ElapsedTimeLabel;
+    JLabel algorithm6ElapsedTimeLabel;
     AlgorithmsProgressWindow() {
         super();
         Box mainBox =  Box.createVerticalBox();
@@ -54,6 +62,70 @@ public class AlgorithmsProgressWindow extends JFrame {
         mainBox.add(algorithm2Box);
         mainBox.add(algorithm2ElapsedTimeBox);
 
+        Box algorithm3Box = Box.createHorizontalBox();
+        algorithm3Box.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+        JLabel algorithm3Label = new JLabel("Algorithme 3");
+        algorithm3Label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+        algorithm3ProgressBar = new JProgressBar();
+        algorithm3ProgressBar.setStringPainted(true);
+        algorithm3ProgressBar.setPreferredSize(new Dimension(300, algorithm3ProgressBar.getPreferredSize().height));
+        algorithm3ElapsedTimeLabel = new JLabel("...");
+        Box algorithm3ElapsedTimeBox = Box.createHorizontalBox();
+        algorithm3ElapsedTimeBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        algorithm3ElapsedTimeBox.add(algorithm3ElapsedTimeLabel);
+        algorithm3Box.add(algorithm3Label);
+        algorithm3Box.add(algorithm3ProgressBar);
+        mainBox.add(algorithm3Box);
+        mainBox.add(algorithm3ElapsedTimeBox);
+
+        Box algorithm4Box = Box.createHorizontalBox();
+        algorithm4Box.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+        JLabel algorithm4Label = new JLabel("Algorithme 4");
+        algorithm4Label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+        algorithm4ProgressBar = new JProgressBar();
+        algorithm4ProgressBar.setStringPainted(true);
+        algorithm4ProgressBar.setPreferredSize(new Dimension(300, algorithm4ProgressBar.getPreferredSize().height));
+        algorithm4ElapsedTimeLabel = new JLabel("...");
+        Box algorithm4ElapsedTimeBox = Box.createHorizontalBox();
+        algorithm4ElapsedTimeBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        algorithm4ElapsedTimeBox.add(algorithm4ElapsedTimeLabel);
+        algorithm4Box.add(algorithm4Label);
+        algorithm4Box.add(algorithm4ProgressBar);
+        mainBox.add(algorithm4Box);
+        mainBox.add(algorithm4ElapsedTimeBox);
+
+        Box algorithm5Box = Box.createHorizontalBox();
+        algorithm5Box.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+        JLabel algorithm5Label = new JLabel("Algorithme 5");
+        algorithm5Label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+        algorithm5ProgressBar = new JProgressBar();
+        algorithm5ProgressBar.setStringPainted(true);
+        algorithm5ProgressBar.setPreferredSize(new Dimension(300, algorithm5ProgressBar.getPreferredSize().height));
+        algorithm5ElapsedTimeLabel = new JLabel("...");
+        Box algorithm5ElapsedTimeBox = Box.createHorizontalBox();
+        algorithm5ElapsedTimeBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        algorithm5ElapsedTimeBox.add(algorithm5ElapsedTimeLabel);
+        algorithm5Box.add(algorithm5Label);
+        algorithm5Box.add(algorithm5ProgressBar);
+        mainBox.add(algorithm5Box);
+        mainBox.add(algorithm5ElapsedTimeBox);
+
+        Box algorithm6Box = Box.createHorizontalBox();
+        algorithm6Box.setBorder(BorderFactory.createEmptyBorder(5,0,5,0));
+        JLabel algorithm6Label = new JLabel("Algorithme 6");
+        algorithm6Label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+        algorithm6ProgressBar = new JProgressBar();
+        algorithm6ProgressBar.setStringPainted(true);
+        algorithm6ProgressBar.setPreferredSize(new Dimension(300, algorithm6ProgressBar.getPreferredSize().height));
+        algorithm6ElapsedTimeLabel = new JLabel("...");
+        Box algorithm6ElapsedTimeBox = Box.createHorizontalBox();
+        algorithm6ElapsedTimeBox.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+        algorithm6ElapsedTimeBox.add(algorithm6ElapsedTimeLabel);
+        algorithm6Box.add(algorithm6Label);
+        algorithm6Box.add(algorithm6ProgressBar);
+        mainBox.add(algorithm6Box);
+        mainBox.add(algorithm6ElapsedTimeBox);
+
         add(mainBox);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -68,6 +140,9 @@ public class AlgorithmsProgressWindow extends JFrame {
             case "Algorithme 2":
                 algorithm2ProgressBar.setValue(progress);
                 break;
+            case "Algorithme 3":
+                algorithm3ProgressBar.setValue(progress);
+                break;
         }
     }
     public void setResult(String algorithmName, boolean prime, long elapsedTime){
@@ -76,12 +151,38 @@ public class AlgorithmsProgressWindow extends JFrame {
             case "Algorithme 1":
                 text += prime ? "est premier" : "n'est pas premier";
                 algorithm1ProgressBar.setString(text);
-                algorithm1ElapsedTimeLabel.setText(String.format("Temps écoulé : %.4f", elapsedTime/1000.0));
+                algorithm1ProgressBar.setValue(100);
+                algorithm1ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
                 break;
             case "Algorithme 2":
                 text += prime ? "est premier" : "n'est pas premier";
                 algorithm2ProgressBar.setString(text);
-                algorithm2ElapsedTimeLabel.setText(String.format("Temps écoulé : %.4f", elapsedTime/1000.0));
+                algorithm2ProgressBar.setValue(100);
+                algorithm2ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
+                break;
+            case "Algorithme 3":
+                text += prime ? "est premier" : "n'est pas premier";
+                algorithm3ProgressBar.setString(text);
+                algorithm3ProgressBar.setValue(100);
+                algorithm3ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
+                break;
+            case "Algorithme 4":
+                text += prime ? "est premier" : "n'est pas premier";
+                algorithm4ProgressBar.setString(text);
+                algorithm4ProgressBar.setValue(100);
+                algorithm4ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
+                break;
+            case "Algorithme 5":
+                text += prime ? "est premier" : "n'est pas premier";
+                algorithm5ProgressBar.setString(text);
+                algorithm5ProgressBar.setValue(100);
+                algorithm5ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
+                break;
+            case "Algorithme 6":
+                text += prime ? "est premier" : "n'est pas premier";
+                algorithm6ProgressBar.setString(text);
+                algorithm6ProgressBar.setValue(100);
+                algorithm6ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
                 break;
         }
     }
@@ -92,6 +193,14 @@ public class AlgorithmsProgressWindow extends JFrame {
         executor.submit(algorithm1);
         PrimeNumberAlgorithm algorithm2 = new PrimeNumberAlgorithm2(number, this);
         executor.submit(algorithm2);
+        PrimeNumberAlgorithm algorithm3 = new PrimeNumberAlgorithm3(number, this);
+        executor.submit(algorithm3);
+        PrimeNumberAlgorithm algorithm4 = new PrimeNumberAlgorithm4(number, this);
+        executor.submit(algorithm4);
+        PrimeNumberAlgorithm algorithm5 = new PrimeNumberAlgorithm5(number, this);
+        executor.submit(algorithm5);
+        PrimeNumberAlgorithm algorithm6 = new PrimeNumberAlgorithm6(number, this);
+        executor.submit(algorithm6);
         executor.shutdown();
     }
 }
