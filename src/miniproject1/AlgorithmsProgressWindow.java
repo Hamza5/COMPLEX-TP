@@ -37,7 +37,6 @@ public class AlgorithmsProgressWindow extends JFrame {
         totalProgressBar = new JProgressBar();
         totalProgressBar.setStringPainted(true);
         Box totalProgressBox = Box.createHorizontalBox();
-//        totalProgressBox.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
         totalProgressBox.add(totalProgressBar);
         mainBox.add(Box.createVerticalStrut(5));
         mainBox.add(totalProgressBar);
@@ -169,42 +168,43 @@ public class AlgorithmsProgressWindow extends JFrame {
     }
     public void setResult(String algorithmName, boolean prime, long elapsedTime){
         String text = "Le nombre ";
+        final String resultMessageFormat = "Temps écoulé : %.3f second%s";
         switch (algorithmName){
             case "Algorithme 1":
                 text += prime ? "est premier" : "n'est pas premier";
                 algorithm1ProgressBar.setString(text);
                 algorithm1ProgressBar.setValue(100);
-                algorithm1ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
+                algorithm1ElapsedTimeLabel.setText(String.format(resultMessageFormat, elapsedTime/1000.0, elapsedTime < 2000 ? "" : "s"));
                 break;
             case "Algorithme 2":
                 text += prime ? "est premier" : "n'est pas premier";
                 algorithm2ProgressBar.setString(text);
                 algorithm2ProgressBar.setValue(100);
-                algorithm2ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
+                algorithm2ElapsedTimeLabel.setText(String.format(resultMessageFormat, elapsedTime/1000.0, elapsedTime < 2000 ? "" : "s"));
                 break;
             case "Algorithme 3":
                 text += prime ? "est premier" : "n'est pas premier";
                 algorithm3ProgressBar.setString(text);
                 algorithm3ProgressBar.setValue(100);
-                algorithm3ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
+                algorithm3ElapsedTimeLabel.setText(String.format(resultMessageFormat, elapsedTime/1000.0, elapsedTime < 2000 ? "" : "s"));
                 break;
             case "Algorithme 4":
                 text += prime ? "est premier" : "n'est pas premier";
                 algorithm4ProgressBar.setString(text);
                 algorithm4ProgressBar.setValue(100);
-                algorithm4ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
+                algorithm4ElapsedTimeLabel.setText(String.format(resultMessageFormat, elapsedTime/1000.0, elapsedTime < 2000 ? "" : "s"));
                 break;
             case "Algorithme 5":
                 text += prime ? "est premier" : "n'est pas premier";
                 algorithm5ProgressBar.setString(text);
                 algorithm5ProgressBar.setValue(100);
-                algorithm5ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
+                algorithm5ElapsedTimeLabel.setText(String.format(resultMessageFormat, elapsedTime/1000.0, elapsedTime < 2000 ? "" : "s"));
                 break;
             case "Algorithme 6":
                 text += prime ? "est premier" : "n'est pas premier";
                 algorithm6ProgressBar.setString(text);
                 algorithm6ProgressBar.setValue(100);
-                algorithm6ElapsedTimeLabel.setText(String.format("Temps écoulé : %.3f", elapsedTime/1000.0));
+                algorithm6ElapsedTimeLabel.setText(String.format(resultMessageFormat, elapsedTime/1000.0, elapsedTime < 2000 ? "" : "s"));
                 break;
         }
     }
@@ -223,6 +223,16 @@ public class AlgorithmsProgressWindow extends JFrame {
         executor.submit(algorithm5);
         PrimeNumberAlgorithm algorithm6 = new PrimeNumberAlgorithm6(number, this);
         executor.submit(algorithm6);
+//        executor.submit(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    logFileWriter.close();
+//                } catch (IOException e) {
+//                    System.err.println("Impossible de fermer le fchier des résultats !");
+//                }
+//            }
+//        });
         executor.shutdown();
         return executor;
     }

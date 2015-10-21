@@ -9,6 +9,7 @@ public class PrimeNumberAlgorithm5 extends PrimeNumberAlgorithm {
     }
     @Override
     public Boolean doInBackground() {
+        super.doInBackground();
         elapsedTime = System.currentTimeMillis();
         long i = 2;
         while(i <= Math.sqrt(number) && prime){

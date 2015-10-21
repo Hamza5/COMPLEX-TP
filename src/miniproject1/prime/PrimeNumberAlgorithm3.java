@@ -9,6 +9,7 @@ public class PrimeNumberAlgorithm3 extends PrimeNumberAlgorithm {
     }
     @Override
     public Boolean doInBackground() {
+        super.doInBackground();
         elapsedTime = System.currentTimeMillis();
         if(number != 2 && number % 2 == 0) prime = false;
         else if(number != 2){
