@@ -1,13 +1,13 @@
 package miniproject1.prime;
 
-import javax.swing.SwingWorker;
+import miniproject1.AlgorithmsProgressWindow;
+
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
-
-import miniproject1.AlgorithmsProgressWindow;
 
 abstract public class PrimeNumberAlgorithm extends SwingWorker<Boolean, Long> implements PropertyChangeListener{
     protected boolean prime;
@@ -69,7 +69,7 @@ abstract public class PrimeNumberAlgorithm extends SwingWorker<Boolean, Long> im
                     Calendar now = Calendar.getInstance();
                     logFileWriter.write(String.format("%tF %tT - %d%%%n", now, now, progress));
                 } catch (IOException ex) {
-                    System.err.println("Erreur lors d'écrir dans le fichier !");
+                    if(!isDone()) System.err.println("Erreur lors d'écrir dans le fichier !");
                 }
             }
         }

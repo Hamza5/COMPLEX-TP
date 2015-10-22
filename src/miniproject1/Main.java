@@ -1,6 +1,6 @@
 package miniproject1;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -43,12 +43,11 @@ public class Main {
                                 }
                             });
                         } catch(NumberFormatException ex){
-                            System.err.println("Les entiers  doivent êtrepositifs !");
-                            System.exit(3);
+                            throw new IllegalArgumentException(ex);
                         }
                     }
                 } catch(IOException ex){
-                    System.err.printf("Erreur lors de l'utilisation ddu fichier %s !%n", args[0]);
+                    System.err.printf("Erreur lors de l'utilisation du fichier %s !%n", args[0]);
                     System.exit(2);
                 }
             }

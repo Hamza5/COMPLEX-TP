@@ -2,13 +2,8 @@ package miniproject1;
 
 import miniproject1.prime.*;
 
-import javax.swing.JFrame;
-import javax.swing.Box;
-import javax.swing.JProgressBar;
-import javax.swing.JLabel;
-import javax.swing.BorderFactory;
-import javax.swing.SwingUtilities;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -36,6 +31,7 @@ public class AlgorithmsProgressWindow extends JFrame {
 
         totalProgressBar = new JProgressBar();
         totalProgressBar.setStringPainted(true);
+        totalProgressBar.setVisible(false);
         Box totalProgressBox = Box.createHorizontalBox();
         totalProgressBox.add(totalProgressBar);
         mainBox.add(Box.createVerticalStrut(5));
@@ -223,22 +219,13 @@ public class AlgorithmsProgressWindow extends JFrame {
         executor.submit(algorithm5);
         PrimeNumberAlgorithm algorithm6 = new PrimeNumberAlgorithm6(number, this);
         executor.submit(algorithm6);
-//        executor.submit(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    logFileWriter.close();
-//                } catch (IOException e) {
-//                    System.err.println("Impossible de fermer le fchier des résultats !");
-//                }
-//            }
-//        });
         executor.shutdown();
         return executor;
     }
     public void start(final ArrayList<Long> numbers){
         final int tasksCount = numbers.size();
         totalProgressBar.setMaximum(tasksCount);
+        totalProgressBar.setVisible(true);
         final AlgorithmsProgressWindow progressWindow = this;
         (new Thread(){
             @Override
