@@ -6,6 +6,7 @@ public class PrimeNumberAlgorithm5 extends PrimeNumberAlgorithm {
     public PrimeNumberAlgorithm5(long number,  AlgorithmsProgressWindow progressWindow) {
         super(number, progressWindow);
         name = "Algorithme 5";
+        order = 5;
     }
     @Override
     public Boolean doInBackground() {

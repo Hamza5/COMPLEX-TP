@@ -16,6 +16,7 @@ abstract public class PrimeNumberAlgorithm extends SwingWorker<Boolean, Long> im
     protected AlgorithmsProgressWindow progressWindow;
     protected long elapsedTime;
     protected FileWriter logFileWriter;
+    protected int order;
     PrimeNumberAlgorithm(long number, AlgorithmsProgressWindow progressWindow){
         super();
         this.prime = true;
@@ -47,6 +48,7 @@ abstract public class PrimeNumberAlgorithm extends SwingWorker<Boolean, Long> im
     protected void done(){
         setProgress(100);
         progressWindow.setResult(name, prime, elapsedTime);
+        progressWindow.addExecutionTime(order, elapsedTime);
         try {
             Calendar now = Calendar.getInstance();
             logFileWriter.write(String.format("Fin : %tF %tT - Temps écoulé : %.3f second%s%n%n", now, now, elapsedTime/1000f, elapsedTime < 2000 ? "" : "s" ));
@@ -65,12 +67,6 @@ abstract public class PrimeNumberAlgorithm extends SwingWorker<Boolean, Long> im
             int progress = (int)evt.getNewValue();
             if (progress != (int)evt.getOldValue()){
                 progressWindow.setProgress(name, progress);
-                try {
-                    Calendar now = Calendar.getInstance();
-                    logFileWriter.write(String.format("%tF %tT - %d%%%n", now, now, progress));
-                } catch (IOException ex) {
-                    if(!isDone()) System.err.println("Erreur lors d'écrir dans le fichier !");
-                }
             }
         }
     }

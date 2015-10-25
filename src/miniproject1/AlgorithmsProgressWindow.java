@@ -4,8 +4,11 @@ import miniproject1.prime.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -24,8 +27,14 @@ public class AlgorithmsProgressWindow extends JFrame {
     JLabel algorithm4ElapsedTimeLabel;
     JLabel algorithm5ElapsedTimeLabel;
     JLabel algorithm6ElapsedTimeLabel;
+    private ArrayList<Long>[] averages;
+    @SuppressWarnings("unchecked")
     AlgorithmsProgressWindow() {
         super();
+        averages = new ArrayList[6];
+        for(int i = 0; i < averages.length; i++){
+            averages[i] = new ArrayList<>();
+        }
         Box mainBox =  Box.createVerticalBox();
         mainBox.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
@@ -226,6 +235,7 @@ public class AlgorithmsProgressWindow extends JFrame {
         final int tasksCount = numbers.size();
         totalProgressBar.setMaximum(tasksCount);
         totalProgressBar.setVisible(true);
+        pack();
         final AlgorithmsProgressWindow progressWindow = this;
         (new Thread(){
             @Override
@@ -243,7 +253,7 @@ public class AlgorithmsProgressWindow extends JFrame {
                         });
                         ExecutorService executor = progressWindow.start(number);
                         executor.awaitTermination(1, TimeUnit.DAYS);
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     }
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
@@ -253,6 +263,25 @@ public class AlgorithmsProgressWindow extends JFrame {
                             resetAll();
                         }
                     });
+                    String filename = "Moyennes.txt";
+                    FileWriter averagesFileWriter;
+                    Calendar now = Calendar.getInstance();
+                    try {
+                        averagesFileWriter = new FileWriter(filename, true);
+                        averagesFileWriter.write(String.format("---------- %tF %tD ----------%n",now, now));
+                        for(int i = 0; i < averages.length; i++){
+                            ArrayList<Long> results = averages[i];
+                            long S = 0;
+                            for (long result : results){
+                                S += result;
+                            }
+                            averagesFileWriter.write(String.format("Algorithme %d / Moyenne : %.3f%n", i+1, (float)S/1000/results.size()));
+                        }
+                        averagesFileWriter.write("\n");
+                        averagesFileWriter.close();
+                    } catch (IOException e) {
+                        System.err.println("Erreur d'écriture dans le fichier de moyennes !");
+                    }
                 } catch(InterruptedException | InvocationTargetException ex){
                     ex.printStackTrace();
                 }
@@ -283,5 +312,8 @@ public class AlgorithmsProgressWindow extends JFrame {
         algorithm6ProgressBar.setString(null);
         algorithm6ProgressBar.setValue(0);
         algorithm6ElapsedTimeLabel.setText("...");
+    }
+    public void addExecutionTime(int algorithm, long elapsedTime){
+        averages[algorithm-1].add(elapsedTime);
     }
 }
