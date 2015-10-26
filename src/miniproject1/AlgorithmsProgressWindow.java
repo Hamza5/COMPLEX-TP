@@ -268,7 +268,7 @@ public class AlgorithmsProgressWindow extends JFrame {
                     Calendar now = Calendar.getInstance();
                     try {
                         averagesFileWriter = new FileWriter(filename, true);
-                        averagesFileWriter.write(String.format("---------- %tF %tD ----------%n",now, now));
+                        averagesFileWriter.write(String.format("---------- %tF %tT ----------%n",now, now));
                         for(int i = 0; i < averages.length; i++){
                             ArrayList<Long> results = averages[i];
                             long S = 0;
