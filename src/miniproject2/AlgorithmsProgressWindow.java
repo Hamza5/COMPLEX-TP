@@ -2,6 +2,7 @@ package miniproject2;
 
 import miniproject2.sort.Algorithm;
 import miniproject2.sort.BubbleSortAlgorithm;
+import miniproject2.sort.HeapSortAlgorithm;
 import miniproject2.sort.SortAlgorithm;
 
 import javax.swing.*;
@@ -49,13 +50,18 @@ public class AlgorithmsProgressWindow extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    public void start(int[] numbers, Algorithm algorithm, boolean worstCase){
-        numberLabel.setText(String.format(worstCase ? "De %d à 1" : "De 1 à %d", numbers.length));
+    public void start(int[] numbers, Algorithm algorithm, boolean worstCase, int[] stopValues){
+        numberLabel.setText(String.format("De %d à %d", numbers[0], numbers[numbers.length-1]));
         caseLabel.setText(worstCase ? "Pire cas" : "Meilleur cas");
         SortAlgorithm sortAlgorithm;
         switch (algorithm) {
             case Bubble:
-                sortAlgorithm = new BubbleSortAlgorithm(numbers, worstCase, this);
+                sortAlgorithm = new BubbleSortAlgorithm(numbers, worstCase, this, stopValues);
+                algorithmNameLabel.setText(sortAlgorithm.toString());
+                sortAlgorithm.execute();
+                break;
+            case Heap:
+                sortAlgorithm = new HeapSortAlgorithm(numbers, worstCase, this, stopValues);
                 algorithmNameLabel.setText(sortAlgorithm.toString());
                 sortAlgorithm.execute();
                 break;
@@ -65,6 +71,7 @@ public class AlgorithmsProgressWindow extends JFrame {
     }
 
     public void setProgress(int progress){
-        algorithmProgressBar.setValue(progress);
+        algorithmProgressBar.setIndeterminate(progress < 0 || progress > 100);
+        if (progress >= 0 && progress <= 100) algorithmProgressBar.setValue(progress);
     }
 }

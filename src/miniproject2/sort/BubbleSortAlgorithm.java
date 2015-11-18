@@ -4,8 +4,8 @@ import miniproject2.AlgorithmsProgressWindow;
 
 public class BubbleSortAlgorithm extends SortAlgorithm {
 
-    public BubbleSortAlgorithm(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow) {
-        super(numbers, worstCase, progressWindow);
+    public BubbleSortAlgorithm(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
+        super(numbers, worstCase, progressWindow, stopValues);
         name = "Tri à bulles";
     }
 
@@ -20,6 +20,9 @@ public class BubbleSortAlgorithm extends SortAlgorithm {
                     numbers[j] = x;
                 }
                 setProgress(Double.valueOf( ++progress / ((double) (numbers.length-1) * (numbers.length-2) / 2) * 100 ).intValue());
+            }
+            if (stopValues.contains(i)) { // Pour sauvegarder les résultats des nombres intermédiaires
+                logIntermediateNumber(i);
             }
         }
     }
