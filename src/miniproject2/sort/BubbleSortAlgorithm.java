@@ -11,7 +11,7 @@ public class BubbleSortAlgorithm extends SortAlgorithm {
 
     @Override
     protected void doOperation() {
-        double progress = 0;
+        long progress = 0;
         for(int i = 0; i < numbers.length - 1; i++){
             for (int j = i + 1; j < numbers.length; j++){
                 if(numbers[i] > numbers [j]){
@@ -19,8 +19,8 @@ public class BubbleSortAlgorithm extends SortAlgorithm {
                     numbers[i] = numbers[j];
                     numbers[j] = x;
                 }
-                setProgress(Double.valueOf( ++progress / ((double) (numbers.length-1) * (numbers.length-2) / 2) * 100 ).intValue());
             }
+            setProgress(Float.valueOf( ++progress / ((float)numbers.length) * 100 ).intValue());
             if (stopValues.contains(i)) { // Pour sauvegarder les résultats des nombres intermédiaires
                 logIntermediateNumber(i);
             }
