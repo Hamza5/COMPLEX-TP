@@ -10,7 +10,7 @@ public class InsertionSortAlgorithm extends SortAlgorithm{
 
     @Override
     protected void doOperation() {
-        long progress = 0;
+        int progress = 0;
         for (int i=0; i<numbers.length; i++){
             int j;
             int x = numbers[i];
