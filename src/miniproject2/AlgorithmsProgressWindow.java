@@ -66,6 +66,12 @@ public class AlgorithmsProgressWindow extends JFrame {
                 sortAlgorithm = new InsertionSortAlgorithm(numbers, worstCase, this, stopValues);
                 algorithmNameLabel.setText(sortAlgorithm.toString());
                 sortAlgorithm.execute();
+                break;
+            case Selection:
+                sortAlgorithm = new SelectionSortAlgorithm(numbers, worstCase, this, stopValues);
+                algorithmNameLabel.setText(sortAlgorithm.toString());
+                sortAlgorithm.execute();
+                break;
         }
         pack();
         setVisible(true);
