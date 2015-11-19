@@ -4,10 +4,11 @@ import miniproject2.AlgorithmsProgressWindow;
 
 public class FusionSortAlgorithm extends SortAlgorithm {
 
-    public FusionSortAlgorithm(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow) {
-        super(numbers, worstCase, progressWindow);
+    public FusionSortAlgorithm(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
+        super(numbers, worstCase, progressWindow, stopValues);
         name = "Tri par fusion";
     }
+   
      void TFusion (int [] table, int Gauche, int Droite)
 	 {
 	 	int centre;
@@ -41,7 +42,10 @@ public class FusionSortAlgorithm extends SortAlgorithm {
     @Override
     protected void doOperation() {
     	
-    	 TFusion (numbers, 0, numbers.length);
+    	 TFusion (numbers, 0, numbers.length-1);
+    	 for(int i=0;i<numbers.length;i++){
+    	        System.out.print(" "+numbers[i]);
+    	        }
     }
 
 }

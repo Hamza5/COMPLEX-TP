@@ -6,92 +6,58 @@ import miniproject2.AlgorithmsProgressWindow;
 
 public class FusionSortAlgorithmItera extends SortAlgorithm {
 
-    public FusionSortAlgorithmItera(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow) {
-        super(numbers, worstCase, progressWindow);
-        name = "Tri à bulles";
+    public FusionSortAlgorithmItera(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
+        super(numbers, worstCase, progressWindow, stopValues);
+        name = "Tri par Fusion";
     }
+    private Float setProgress(Float valueOf) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	float progress=0;
+	public static void TFusion(int[] Tab) {
+ 		if(Tab.length < 2) {return;}
+ 		int etape = 1;
+ 		int GauchD, DroiteD;
 
-    static public class MergePosInfo
-    {
-        public int left;
-        public int mid;
-        public int right;
-    }
-     public void MergeSort_Iterative(int [] numbers, int left, int right)
-    {
-        int mid;
-        if (right <= left) return;
-        
-        LinkedList<MergePosInfo> list1 = new LinkedList<MergePosInfo>();
-        LinkedList<MergePosInfo> list2 = new LinkedList<MergePosInfo>();
- 
-        MergePosInfo info = new MergePosInfo();
-        info.left = left;
-        info.right = right;
-        info.mid = -1;
-       
-        list1.add(info);
- 
-        while(true){
-            if(list1.size() == 0)  break;
+ 		while(etape < Tab.length) {
+ 			GauchD = 0;
+ 			DroiteD = etape;
+ 			while(DroiteD + etape <= Tab.length) {
+ 				Fusion(Tab, GauchD, GauchD + etape, DroiteD, DroiteD + etape);
+ 				GauchD = DroiteD + etape;
+ 				DroiteD = GauchD + etape;
+ 			}
+ 			if(DroiteD < Tab.length) {Fusion(Tab, GauchD, GauchD + etape, DroiteD, Tab.length);}
+ 			etape *= 2;
+ 		}
+ 	}
+ 	public static void Fusion(int[] Tab, int GauchD, int FinGauche,int DroiteD, int FinDroite) {
+ 			int[] Droite = new int[FinDroite-DroiteD + 1];
+ 			int[] Gauche = new int[FinGauche-GauchD + 1];
 
-            
-            left = list1.get(0).left;
-            right = list1.get(0).right;
-            list1.remove(0);
-            mid = (right + left) / 2;
-            System.out.println("info.left "+(info.left/(double)numbers.length*100-50));
-            if(left < right){
-                MergePosInfo info2 = new MergePosInfo();
-                info2.left = left;
-                info2.right = right;
-                info2.mid = mid + 1;
-                list2.add(info2);
- 
-                info.left = left;
-                info.right = mid;
-                list1.add(info);
-                
-                info.left = mid + 1;
-                info.right = right;
-                list1.add(info);
-                
+ 			for(int i = 0, k = DroiteD; i < (Droite.length - 1); ++i, ++k) {Droite[i] = Tab[k];}
+ 			for(int i = 0, k = GauchD; i < (Gauche.length - 1); ++i, ++k) {Gauche[i] = Tab[k];}
 
-            }
-          // System.out.println("mid " +mid);
-        }
-      
-        
-        for (int i = 0; i < list2.size(); i++){
-        	Fusion(numbers, list2.get(i).left, list2.get(i).mid, list2.get(i).right);
-        }
-       
-    }
-     float progress=0;
-     void Fusion (int table[], int Gauche, int centre, int Droite){	
-    	int j = Gauche; 
-	 	int k = centre+1; 
-	 	int i = Gauche; 
-	 	int [] TableAnc = (int[]) table.clone(); 
-	 	
-	 	//setProgress(Double.valueOf((Gauche/(double)table.length)*200).intValue());
-	 	while (j<= centre && k <= Droite)
-	 	{   
-	 	//setProgress(Double.valueOf(Droite/(double)table.length*100).intValue());
-	 		if(TableAnc[j] <= TableAnc[k]){table[i] = TableAnc[j];j++;}
-	 		else{table[i] = TableAnc[k];k++;}
-	 		i++;
-	 	}
-	 	if (i<=Droite)
-	 	{
-	 		while(j<=centre) {table[i]=TableAnc[j];i++;j++;}
-	 		while(k<=Droite) {table[i]=TableAnc[k];i++;k++;}
-	 	}
-	 }
+ 			Droite[Droite.length-1] = Integer.MAX_VALUE;
+ 			Gauche[Gauche.length-1] = Integer.MAX_VALUE;
+ 			for(int k = GauchD, m = 0, n = 0; k < FinDroite; ++k) {
+ 				if(Gauche[m] <= Droite[n]) {
+ 					Tab[k] = Gauche[m];
+ 					m++;
+ 				}
+ 				else {Tab[k] = Droite[n];n++;}
+ 			}
+ 		}
     @Override
     protected void doOperation() {
-        MergeSort_Iterative(numbers, 0, numbers.length-1);
-        System.out.print("tableau trie"+numbers.toString());
+    	TFusion(numbers);
+    	// MergeSort_Iterative(numbers, 0, numbers.length-1);
+    	boolean bool=true;
+        for(int i=0;i<numbers.length-1;i++){
+        	if(numbers[i]>numbers[i+1]) bool=false;
+        }
+        System.out.print(bool);
     }
 
 }

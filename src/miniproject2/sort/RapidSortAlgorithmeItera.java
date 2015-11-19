@@ -7,9 +7,9 @@ import miniproject2.AlgorithmsProgressWindow;
 public class RapidSortAlgorithmeItera extends SortAlgorithm {
 	
 	 double progress = 0;
-    public RapidSortAlgorithmeItera(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow) {
-        super(numbers, worstCase, progressWindow);
-        name = "Tri à bulles";
+    public RapidSortAlgorithmeItera(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
+        super(numbers, worstCase, progressWindow, stopValues);
+        name = "Tri à rapide Itratif";
     }
 
      int returnFirst(int x, int y) {
@@ -64,5 +64,6 @@ public class RapidSortAlgorithmeItera extends SortAlgorithm {
  }
     protected void doOperation() {
     	RapidSortItera(numbers,0, numbers.length-1);
+    	
     }
 }

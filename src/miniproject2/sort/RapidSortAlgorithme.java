@@ -5,9 +5,8 @@ import java.util.Arrays;
 import miniproject2.AlgorithmsProgressWindow;
 
 public class RapidSortAlgorithme extends SortAlgorithm {
-	 double progress = 0;
-    public RapidSortAlgorithme(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow) {
-        super(numbers, worstCase, progressWindow);
+    public RapidSortAlgorithme(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
+        super(numbers, worstCase, progressWindow, stopValues);
         name = "Tri rapide";
     }
 
@@ -75,11 +74,10 @@ public class RapidSortAlgorithme extends SortAlgorithm {
 	 }
     protected void doOperation() {
     	System.out.print(Arrays.toString(numbers));
-    	System.out.print("lalalalal");
     	int  n  =  numbers.length-1  ;
     	TriRapide(0,n);
-    	//System.out.print(Arrays.toString(numbers));
-    	setProgress(Double.valueOf(100-progress).intValue());
+    	setProgress(Double.valueOf(100-getProgress()).intValue());
+    	 
     
     }
 
