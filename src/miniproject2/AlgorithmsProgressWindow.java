@@ -72,6 +72,11 @@ public class AlgorithmsProgressWindow extends JFrame {
                 algorithmNameLabel.setText(sortAlgorithm.toString());
                 sortAlgorithm.execute();
                 break;
+            case Heap:
+                sortAlgorithm = new HeapSortAlgorithm(numbers, worstCase, this, stopValues);
+                algorithmNameLabel.setText(sortAlgorithm.toString());
+                sortAlgorithm.execute();
+                break;
         }
         pack();
         setVisible(true);
