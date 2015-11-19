@@ -1,9 +1,6 @@
 package miniproject2;
 
-import miniproject2.sort.Algorithm;
-import miniproject2.sort.BubbleSortAlgorithm;
-import miniproject2.sort.HeapSortAlgorithm;
-import miniproject2.sort.SortAlgorithm;
+import miniproject2.sort.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,8 +57,18 @@ public class AlgorithmsProgressWindow extends JFrame {
                 algorithmNameLabel.setText(sortAlgorithm.toString());
                 sortAlgorithm.execute();
                 break;
-            case Heap:
-                sortAlgorithm = new HeapSortAlgorithm(numbers, worstCase, this, stopValues);
+            case HeapIterative:
+                sortAlgorithm = new HeapIterativeSortAlgorithm(numbers, worstCase, this, stopValues);
+                algorithmNameLabel.setText(sortAlgorithm.toString());
+                sortAlgorithm.execute();
+                break;
+            case Insertion:
+                sortAlgorithm = new InsertionSortAlgorithm(numbers, worstCase, this, stopValues);
+                algorithmNameLabel.setText(sortAlgorithm.toString());
+                sortAlgorithm.execute();
+                break;
+            case Selection:
+                sortAlgorithm = new SelectionSortAlgorithm(numbers, worstCase, this, stopValues);
                 algorithmNameLabel.setText(sortAlgorithm.toString());
                 sortAlgorithm.execute();
                 break;
