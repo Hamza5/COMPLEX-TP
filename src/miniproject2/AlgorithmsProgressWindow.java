@@ -77,6 +77,26 @@ public class AlgorithmsProgressWindow extends JFrame {
                 algorithmNameLabel.setText(sortAlgorithm.toString());
                 sortAlgorithm.execute();
                 break;
+            case Rapid:
+                sortAlgorithm = new RapidSortAlgorithme(numbers, worstCase, this, stopValues);
+                algorithmNameLabel.setText(sortAlgorithm.toString());
+                sortAlgorithm.execute();
+                break;
+            case RapidIterative:
+                sortAlgorithm = new RapidSortAlgorithmeItera(numbers, worstCase, this, stopValues);
+                algorithmNameLabel.setText(sortAlgorithm.toString());
+                sortAlgorithm.execute();
+                break;
+            case Merge:
+                sortAlgorithm = new FusionSortAlgorithm(numbers, worstCase, this, stopValues);
+                algorithmNameLabel.setText(sortAlgorithm.toString());
+                sortAlgorithm.execute();
+                break;
+            case MergeIterative:
+                sortAlgorithm = new FusionSortAlgorithmItera(numbers, worstCase, this, stopValues);
+                algorithmNameLabel.setText(sortAlgorithm.toString());
+                sortAlgorithm.execute();
+                break;
         }
         pack();
         setVisible(true);
