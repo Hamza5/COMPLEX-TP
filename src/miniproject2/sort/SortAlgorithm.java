@@ -140,9 +140,4 @@ abstract public class SortAlgorithm extends SwingWorker<Void, Void> implements P
             System.err.println("Erreur lors de l'écriture dans le fichier !");
         }
     }
-
-	public void sort() {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -1,39 +1,14 @@
 package miniproject2.sort;
 
-import java.util.Arrays;
-
 import miniproject2.AlgorithmsProgressWindow;
 
 public class RapidSortAlgorithmeItera extends SortAlgorithm {
-	
-	 double progress = 0;
+
     public RapidSortAlgorithmeItera(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
-        name = "Tri rapide Itratif";
+        name = "Tri rapide itératif";
     }
 
-     int returnFirst(int x, int y) {
-	    return x;
-	}
-  
-//Meme fonction dans l'iteratif
-//  int partition (int tab[], int IndxDeb, int IndxFin)
-// {
-//     int x = tab[IndxFin];
-//     int i = (IndxDeb - 1);
-//  
-//     for (int j = IndxDeb; j <= IndxFin- 1; j++)
-//     {
-//         if (tab[j] <= x)
-//         {
-//             i++;
-//             tab[i]=returnFirst(tab[j],tab[j]=tab[i]);//permutation entre tab[i] et tab[j]
-//       }
-//     }
-//     tab[i+1]=returnFirst(tab[IndxFin],tab[IndxFin]=tab[i+1]);
-//     return (i + 1);
-// }
-//  
      int partition(int Gauche, int Droite)
      {     
            int i = Gauche, j = Droite;
@@ -52,7 +27,7 @@ public class RapidSortAlgorithmeItera extends SortAlgorithm {
                        i++;
                        j--;
                  }
-           };
+           }
           
            return i;
      }

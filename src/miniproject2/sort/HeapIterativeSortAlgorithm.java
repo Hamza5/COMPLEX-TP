@@ -5,7 +5,7 @@ import miniproject2.AlgorithmsProgressWindow;
 public class HeapIterativeSortAlgorithm extends SortAlgorithm {
     public HeapIterativeSortAlgorithm(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
-        name = "Tri par tas itératif";
+        name = "Tri par tas itÃ©ratif";
     }
 
     private void sink(int[] numbers, int k, int N) {

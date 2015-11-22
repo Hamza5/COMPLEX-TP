@@ -1,13 +1,11 @@
 package miniproject2.sort;
 
-import java.util.Arrays;
-
 import miniproject2.AlgorithmsProgressWindow;
 
 public class RapidSortAlgorithme extends SortAlgorithm {
     public RapidSortAlgorithme(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
-        name = "Tri rapide";
+        name = "Tri rapide récursif";
     }
 
     int partition(int Gauche, int Droite)
@@ -28,7 +26,7 @@ public class RapidSortAlgorithme extends SortAlgorithm {
                       i++;
                       j--;
                 }
-          };
+          }
          
           return i;
     }
