@@ -5,7 +5,7 @@ import miniproject2.AlgorithmsProgressWindow;
 public class HeapSortAlgorithm extends SortAlgorithm {
     public HeapSortAlgorithm(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
-        name = "Tri par tas rÃ©cursif";
+        name = "Tri par tas récursif";
     }
 
     @Override
