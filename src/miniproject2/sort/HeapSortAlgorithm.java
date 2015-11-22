@@ -2,22 +2,10 @@ package miniproject2.sort;
 
 import miniproject2.AlgorithmsProgressWindow;
 
-public class HeapIterativeSortAlgorithm extends SortAlgorithm {
-    public HeapIterativeSortAlgorithm(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
+public class HeapSortAlgorithm extends SortAlgorithm {
+    public HeapSortAlgorithm(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
-        name = "Tri par tas itératif";
-    }
-
-    private void sink(int[] numbers, int k, int N) {
-        while (2*k <= N) {
-            int j = 2*k;
-            if (j < N && numbers[j] < numbers[j+1]) j++;
-            if (numbers[k] >= numbers[j]) break;
-            int x = numbers[k];
-            numbers[k] = numbers[j];
-            numbers[j] = x;
-            k = j;
-        }
+        name = "Tri par tas récursif";
     }
 
     @Override
@@ -38,4 +26,15 @@ public class HeapIterativeSortAlgorithm extends SortAlgorithm {
         }
     }
 
+    private void sink(int[] numbers, int k, int N) {
+        if (2*k <= N) {
+            int j = 2*k;
+            if (j < N && numbers[j] < numbers[j+1]) j++;
+            if (numbers[k] >= numbers[j]) return;
+            int x = numbers[k];
+            numbers[k] = numbers[j];
+            numbers[j] = x;
+            sink(numbers, j, N);
+        }
+    }
 }
