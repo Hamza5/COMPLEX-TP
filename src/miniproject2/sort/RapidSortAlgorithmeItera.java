@@ -9,7 +9,7 @@ public class RapidSortAlgorithmeItera extends SortAlgorithm {
 	 double progress = 0;
     public RapidSortAlgorithmeItera(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
-        name = "Tri à rapide Itratif";
+        name = "Tri rapide Itratif";
     }
 
      int returnFirst(int x, int y) {
@@ -43,7 +43,7 @@ public class RapidSortAlgorithmeItera extends SortAlgorithm {
      pile[ ++tete ] = IndxFin;
      while ( tete >= 0 )
      {	
-     setProgress(Double.valueOf((1-pile[tete]/(double)numbers.length)*200).intValue());
+     setProgress(Double.valueOf((1-pile[tete]/(double)numbers.length)*100).intValue());
          IndxFin = pile[ tete-- ];
          IndxDeb = pile[ tete-- ];
   

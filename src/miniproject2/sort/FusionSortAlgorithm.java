@@ -27,7 +27,7 @@ public class FusionSortAlgorithm extends SortAlgorithm {
 	 	int i = Gauche; 
 	 	int [] TableAnc = (int[]) table.clone(); 
 	 	while (j<= centre && k <= Droite)
-	 	{   System.out.println("Droite "+Droite/(double)table.length*100);
+	 	{  
 	 	setProgress(Double.valueOf(Droite/(double)table.length*100).intValue());
 	 		if(TableAnc[j] <= TableAnc[k]){table[i] = TableAnc[j];j++;}
 	 		else{table[i] = TableAnc[k];k++;}
@@ -41,11 +41,8 @@ public class FusionSortAlgorithm extends SortAlgorithm {
 	 }
     @Override
     protected void doOperation() {
-    	
     	 TFusion (numbers, 0, numbers.length-1);
-    	 for(int i=0;i<numbers.length;i++){
-    	        System.out.print(" "+numbers[i]);
-    	        }
+    	
     }
 
 }
