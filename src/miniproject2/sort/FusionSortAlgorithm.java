@@ -20,32 +20,44 @@ public class FusionSortAlgorithm extends SortAlgorithm {
 	 		Fusion (table, Gauche, centre, Droite);
 	 	}
 	 }
-
-	 void Fusion (int table[], int Gauche, int centre, int Droite)
-	 {	int j = Gauche; 
-	 	int k = centre+1; 
-	 	int i = Gauche; 
-	 	int [] TableAnc = (int[]) table.clone(); 
-	 	while (j<= centre && k <= Droite)
-	 	{   System.out.println("Droite "+Droite/(double)table.length*100);
-	 	setProgress(Double.valueOf(Droite/(double)table.length*100).intValue());
-	 		if(TableAnc[j] <= TableAnc[k]){table[i] = TableAnc[j];j++;}
-	 		else{table[i] = TableAnc[k];k++;}
-	 		i++;
-	 	}
-	 	if (i<=Droite)
-	 	{
-	 		while(j<=centre) {table[i]=TableAnc[j];i++;j++;}
-	 		while(k<=Droite) {table[i]=TableAnc[k];i++;k++;}
-	 	}
-	 }
-    @Override
+    int progress=0;
+ 	public  void Fusion(int []Tabtemp,int IndiceGauche,int Piv,int IndiceDroite){
+		int tempIndex=0;
+		int lowerIndex = IndiceGauche;
+		int midIndex = Piv-1;
+		int totalItems = IndiceDroite-lowerIndex+1;
+		while(lowerIndex <= midIndex && Piv <= IndiceDroite){
+			if((IndiceGauche/(double)numbers.length*100)>progress){
+				progress=Double.valueOf(IndiceGauche/(double)numbers.length*100).intValue();
+			setProgress(Double.valueOf(IndiceGauche/(double)numbers.length*100).intValue());}
+			if(numbers[lowerIndex] < numbers[Piv]){
+				Tabtemp[tempIndex++] = numbers[lowerIndex++];
+			}else{
+				Tabtemp[tempIndex++] = numbers[Piv++];
+			}
+		}
+		
+		while(lowerIndex <= midIndex){
+			Tabtemp[tempIndex++] = numbers[lowerIndex++];
+		}
+		
+		while(Piv <= IndiceDroite){
+			Tabtemp[tempIndex++] 
+					= numbers[Piv++];
+		}
+		
+		for(int i=0;i<totalItems;i++){
+			numbers[IndiceGauche+i] = Tabtemp[i];
+		}
+	}
+    public  void sort(){
+		int []Tabtemp = new int[numbers.length];
+		TFusion(Tabtemp,0,numbers.length-1);
+	}
     protected void doOperation() {
     	
-    	 TFusion (numbers, 0, numbers.length-1);
-    	 for(int i=0;i<numbers.length;i++){
-    	        System.out.print(" "+numbers[i]);
-    	        }
+    	// TFusion (numbers, 0, numbers.length-1);
+    	sort();
     }
 
 }

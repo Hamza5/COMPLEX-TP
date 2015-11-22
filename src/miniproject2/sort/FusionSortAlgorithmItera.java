@@ -8,14 +8,14 @@ public class FusionSortAlgorithmItera extends SortAlgorithm {
 
     public FusionSortAlgorithmItera(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
-        name = "Tri par Fusion";
+        name = "Tri par Fusion iterative";
     }
     private Float setProgress(Float valueOf) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	float progress=0;
-	public static void TFusion(int[] Tab) {
+	public  void TFusion(int[] Tab) {
  		if(Tab.length < 2) {return;}
  		int etape = 1;
  		int GauchD, DroiteD;
@@ -29,6 +29,7 @@ public class FusionSortAlgorithmItera extends SortAlgorithm {
  				DroiteD = GauchD + etape;
  			}
  			if(DroiteD < Tab.length) {Fusion(Tab, GauchD, GauchD + etape, DroiteD, Tab.length);}
+ 			setProgress(Double.valueOf(etape/(double)numbers.length*100).intValue());
  			etape *= 2;
  		}
  	}
@@ -52,12 +53,7 @@ public class FusionSortAlgorithmItera extends SortAlgorithm {
     @Override
     protected void doOperation() {
     	TFusion(numbers);
-    	// MergeSort_Iterative(numbers, 0, numbers.length-1);
-    	boolean bool=true;
-        for(int i=0;i<numbers.length-1;i++){
-        	if(numbers[i]>numbers[i+1]) bool=false;
-        }
-        System.out.print(bool);
+    	
     }
 
 }
