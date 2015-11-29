@@ -10,21 +10,21 @@ public class RapidSortAlgorithme extends SortAlgorithm {
         name = "Tri rapide";
     }
 
-    int partition(int Gauche, int Droite)
-    {     
+    int partition(int tab[], int Gauche, int Droite)
+    {
           int i = Gauche, j = Droite;
           int tmp;
-          int pivot = numbers[(Gauche + Droite) / 2];
-
+          int pivot = tab[(Gauche + Droite) / 2];
+         
           while (i <= j) {
-                while (numbers[i] < pivot)
+                while (tab[i] < pivot)
                       i++;
-                while (numbers[j] > pivot)
+                while (tab[j] > pivot)
                       j--;
                 if (i <= j) {
-                      tmp = numbers[i];
-                      numbers[i] = numbers[j];
-                      numbers[j] = tmp;
+                      tmp = tab[i];
+                      tab[i] = tab[j];
+                      tab[j] = tmp;
                       i++;
                       j--;
                 }
@@ -32,21 +32,17 @@ public class RapidSortAlgorithme extends SortAlgorithm {
          
           return i;
     }
-	 void TriRapide (int Gauche,int Droite)
-	 {  
-	   int  i;
-	  if(Droite > Gauche)
-	  {
-	    i = partition(Gauche,Droite);
-	    TriRapide (Gauche,i-1);
-	    TriRapide (i+1,Droite);
-	  }
-	 }
+     
+    void TriRapide(int tab[], int Gauche, int Droite) {
+          int index = partition(tab, Gauche, Droite);
+          if (Gauche < index - 1)
+                TriRapide(tab, Gauche, index - 1);
+          if (index < Droite)
+                TriRapide(tab, index, Droite);
+    }
     protected void doOperation() {
     	int  n  =  numbers.length-1  ;
-    	TriRapide(0,n);
-    	 
-    
-    }
+    	TriRapide(numbers,0,n);
+     }
 
 }
