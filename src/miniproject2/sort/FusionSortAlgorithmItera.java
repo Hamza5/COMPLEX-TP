@@ -1,20 +1,13 @@
 package miniproject2.sort;
 
-import java.util.LinkedList;
-
 import miniproject2.AlgorithmsProgressWindow;
 
 public class FusionSortAlgorithmItera extends SortAlgorithm {
 
     public FusionSortAlgorithmItera(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
-        name = "Tri par Fusion iterative";
+        name = "Tri par fusion itératif";
     }
-    private Float setProgress(Float valueOf) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	float progress=0;
 	public  void TFusion(int[] Tab) {
  		if(Tab.length < 2) {return;}
  		int etape = 1;

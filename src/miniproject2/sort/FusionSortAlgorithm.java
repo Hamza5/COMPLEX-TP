@@ -8,7 +8,7 @@ public class FusionSortAlgorithm extends SortAlgorithm {
 
     public FusionSortAlgorithm(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
-        name = "Tri par fusion";
+        name = "Tri par fusion récursif";
     }
    
      void TFusion (int [] table, int Gauche, int Droite)
@@ -59,7 +59,10 @@ public class FusionSortAlgorithm extends SortAlgorithm {
 		TFusion(Tabtemp,0,numbers.length-1);
 	}
     protected void doOperation() {
+<<<<<<< HEAD
   
+=======
+>>>>>>> 0a57cf4060d2a5472025f7167ba35199d5a26d77
     	sort();
     }
 

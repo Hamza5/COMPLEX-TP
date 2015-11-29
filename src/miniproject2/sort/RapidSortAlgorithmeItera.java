@@ -1,14 +1,12 @@
 package miniproject2.sort;
 
-import java.util.Arrays;
-
 import miniproject2.AlgorithmsProgressWindow;
 
 public class RapidSortAlgorithmeItera extends SortAlgorithm {
-	
-	 double progress = 0;
+
     public RapidSortAlgorithmeItera(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
+
         name = "Tri rapide Itratif";
         
     }
@@ -41,6 +39,7 @@ public class RapidSortAlgorithmeItera extends SortAlgorithm {
          }
          permuter (i + 1, h);
          return (i + 1);
+
      }
   void RapidSortItera (int tab[], int IndxDeb, int IndxFin)
  {
