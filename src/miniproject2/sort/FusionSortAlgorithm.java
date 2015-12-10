@@ -1,5 +1,7 @@
 package miniproject2.sort;
 
+import java.util.Arrays;
+
 import miniproject2.AlgorithmsProgressWindow;
 
 public class FusionSortAlgorithm extends SortAlgorithm {
@@ -17,44 +19,50 @@ public class FusionSortAlgorithm extends SortAlgorithm {
 	 		centre = (Gauche+Droite)/2;
 	 		TFusion(table, Gauche, centre);
 	 		TFusion(table, centre+1, Droite);
-	 		Fusion (table, Gauche, centre, Droite);
+	 		mergeParts ( Gauche, centre, Droite);
 	 	}
 	 }
     int progress=0;
- 	public  void Fusion(int []Tabtemp,int IndiceGauche,int Piv,int IndiceDroite){
-		int tempIndex=0;
-		int lowerIndex = IndiceGauche;
-		int midIndex = Piv-1;
-		int totalItems = IndiceDroite-lowerIndex+1;
-		while(lowerIndex <= midIndex && Piv <= IndiceDroite){
-			if((IndiceGauche/(double)numbers.length*100)>progress){
-				progress=Double.valueOf(IndiceGauche/(double)numbers.length*100).intValue();
-			setProgress(Double.valueOf(IndiceGauche/(double)numbers.length*100).intValue());}
-			if(numbers[lowerIndex] < numbers[Piv]){
-				Tabtemp[tempIndex++] = numbers[lowerIndex++];
-			}else{
-				Tabtemp[tempIndex++] = numbers[Piv++];
-			}
-		}
-		
-		while(lowerIndex <= midIndex){
-			Tabtemp[tempIndex++] = numbers[lowerIndex++];
-		}
-		
-		while(Piv <= IndiceDroite){
-			Tabtemp[tempIndex++] 
-					= numbers[Piv++];
-		}
-		
-		for(int i=0;i<totalItems;i++){
-			numbers[IndiceGauche+i] = Tabtemp[i];
-		}
-	}
-    public  void sort(){
+    int []Tabtemp = new int[numbers.length];
+
+ void mergeParts(int IndcGauche, int piv, int IndcDroite) {
+ 
+        for (int i = IndcGauche; i <= IndcDroite; i++) {
+            Tabtemp [i] = numbers[i];
+        }
+        int i = IndcGauche;
+        int j = piv + 1;
+        int k = IndcGauche;
+        while (i <= piv && j <= IndcDroite) {
+        	if((IndcGauche/(double)numbers.length*100)>progress){
+				progress=Double.valueOf(IndcGauche/(double)numbers.length*100).intValue();
+			setProgress(Double.valueOf(IndcGauche/(double)numbers.length*100).intValue());}
+            if (Tabtemp [i] <= Tabtemp [j]) {
+                numbers[k] = Tabtemp [i];
+                i++;
+            } else {
+                numbers[k] = Tabtemp [j];
+                j++;
+            }
+            k++;
+        }
+        while (i <= piv) {
+            numbers[k] = Tabtemp [i];
+            k++;
+            i++;
+        }
+ 
+    }
+
+ public  void sort(){
 		int []Tabtemp = new int[numbers.length];
 		TFusion(Tabtemp,0,numbers.length-1);
 	}
     protected void doOperation() {
+<<<<<<< HEAD
+  
+=======
+>>>>>>> 0a57cf4060d2a5472025f7167ba35199d5a26d77
     	sort();
     }
 
