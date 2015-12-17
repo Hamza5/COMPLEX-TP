@@ -1,7 +1,7 @@
 package miniproject3;
 
 import miniproject3.coloring.ColoringAlgorithm;
-import miniproject3.coloring.DepthFirstColoringAlgorithm;
+import miniproject3.coloring.HeuristicColoringAlgorithm;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -30,13 +30,19 @@ public class Main {
                     System.arraycopy(args, 1, colors, 0, colors.length);
 
                     // Algorithme profondeur d'abord
-                    ColoringAlgorithm deepFirst = new DepthFirstColoringAlgorithm(vertices, colors);
-                    deepFirst.start();
+                    //ColoringAlgorithm deepFirst = new DepthFirstColoringAlgorithm(vertices, colors);
+                    //deepFirst.start();
+
+                    // Algorithme recherche heuristique
+                    ColoringAlgorithm heuristic = new HeuristicColoringAlgorithm(vertices, colors);
+                    heuristic.start();
 
                     try {
-                        deepFirst.join();
+                        // deepFirst.join();
+                        heuristic.join();
                     } catch (InterruptedException e) {
-                        deepFirst.interrupt();
+                        // deepFirst.interrupt();
+                        heuristic.interrupt();
                         throw e;
                     }
                 } catch (FileNotFoundException ex){
