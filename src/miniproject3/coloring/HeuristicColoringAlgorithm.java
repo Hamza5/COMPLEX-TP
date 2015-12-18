@@ -1,8 +1,10 @@
 package miniproject3.coloring;
 
+import miniproject3.MainWindow;
+
 public class HeuristicColoringAlgorithm extends ColoringAlgorithm{
-    public HeuristicColoringAlgorithm(int[][] matrix, String[] colorsNames){
-        super(matrix, colorsNames);
+    public HeuristicColoringAlgorithm(int[][] matrix, String[] colorsNames, MainWindow window){
+        super(matrix, colorsNames, window);
         name = "Recherche Heuristique";
     }
 

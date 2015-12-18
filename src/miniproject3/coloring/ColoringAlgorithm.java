@@ -1,5 +1,8 @@
 package miniproject3.coloring;
 
+import miniproject3.MainWindow;
+
+import javax.swing.*;
 import java.util.Arrays;
 
 public abstract class ColoringAlgorithm extends Thread {
@@ -9,10 +12,12 @@ public abstract class ColoringAlgorithm extends Thread {
     protected long startTime;
     protected long endTime;
     protected String[] solution;
-    public ColoringAlgorithm(int[][] matrix, String[] colorsNames){
+    private MainWindow parentWindow;
+    public ColoringAlgorithm(int[][] matrix, String[] colorsNames, MainWindow window){
         super();
         adjacency = matrix;
         colors = colorsNames;
+        parentWindow = window;
     }
     protected boolean validate(String[] verticesColors){
         for (int i=0; i<adjacency.length; i++){
@@ -31,9 +36,15 @@ public abstract class ColoringAlgorithm extends Thread {
     protected void doAfter(){
         endTime = System.currentTimeMillis();
         float elapsedTime = (endTime - startTime)/(float)1000;
-        System.out.printf("Algorithme : %s - Temps écoulé : %.3f seconde%s%n", name, elapsedTime, elapsedTime > 1 ? "s" : "");
-        if (solution != null) System.out.printf("Solution trouvée : %s%n", Arrays.toString(solution));
-        else System.out.println("Aucune solution trouvée");
+        final String message = String.format("Algorithme : %s - Temps écoulé : %.3f seconde%s%n", name, elapsedTime, elapsedTime > 1 ? "s" : "")
+        + (solution != null ? String.format("Solution trouvée : %s%n", Arrays.toString(solution)) : "Aucune solution trouvée");
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JOptionPane.showMessageDialog(parentWindow, message, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+                parentWindow.enableCalculationButton(true);
+            }
+        });
     }
     protected void doBefore(){
         startTime = System.currentTimeMillis();

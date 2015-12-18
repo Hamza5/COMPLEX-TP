@@ -1,9 +1,11 @@
 package miniproject3.coloring;
 
+import miniproject3.MainWindow;
+
 public class DepthFirstColoringAlgorithm extends ColoringAlgorithm{
 
-    public DepthFirstColoringAlgorithm(int[][] matrix, String[] colorsNames){
-        super(matrix, colorsNames);
+    public DepthFirstColoringAlgorithm(int[][] matrix, String[] colorsNames, MainWindow window){
+        super(matrix, colorsNames, window);
         name = "Profondeur d'abord";
     }
 
