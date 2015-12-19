@@ -20,8 +20,8 @@ public abstract class ColoringAlgorithm extends Thread {
         parentWindow = window;
     }
     protected boolean validate(String[] verticesColors){
-        for (int i=0; i<adjacency.length; i++){
-            for (int j=0; j<adjacency[0].length; j++){
+        for (int i=0; i<adjacency.length-1; i++){
+            for (int j=i+1; j<adjacency[0].length; j++){
                 if ((adjacency[i][j] > 0 || adjacency[j][i] > 0) && verticesColors[i].equals(verticesColors[j])) return false;
             }
         }
