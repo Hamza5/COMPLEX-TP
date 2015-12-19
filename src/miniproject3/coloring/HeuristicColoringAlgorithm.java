@@ -24,7 +24,8 @@ public class HeuristicColoringAlgorithm extends ColoringAlgorithm{
     private boolean heuristicDepthTree(String[] verticesColors){
         boolean found;
         if (verticesColors.length == adjacency.length){
-            found = validate(verticesColors);
+            // On n'a pas besoin de valider tout, car on est sûr que le coloriage des sommets précédents est correcte.
+            found = heuristic(verticesColors);
             if(found) solution = verticesColors;
         } else {
             found = false;
