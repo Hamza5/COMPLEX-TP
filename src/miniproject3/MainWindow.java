@@ -85,6 +85,7 @@ public class MainWindow extends JFrame implements ActionListener{
         mainBox.add(calculationBox);
         add(mainBox);
         setTitle(title);
+        getRootPane().setDefaultButton(calculateButton);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
