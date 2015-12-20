@@ -30,6 +30,7 @@ public class SolutionDialog extends JDialog{
         solutionTextArea.setBorder(BorderFactory.createLoweredSoftBevelBorder());
         solutionTextArea.setEditable(false);
         solutionTextArea.setLineWrap(true);
+        solutionTextArea.setWrapStyleWord(true);
         Box solutionBox = Box.createHorizontalBox();
         solutionBox.add(solutionLabel);
         solutionBox.add(Box.createHorizontalStrut(5));
