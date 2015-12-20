@@ -149,4 +149,9 @@ public class MainWindow extends JFrame implements ActionListener{
         colorsTextArea.setText(colors);
         calculateButton.doClick();
     }
+
+    public String getMethod(){
+        if (depthRadioButton.isSelected()) return depthRadioButton.getText();
+        else return heuristicRadioButton.getText();
+    }
 }

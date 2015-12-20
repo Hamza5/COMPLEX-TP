@@ -1,6 +1,7 @@
 package miniproject3.coloring;
 
 import miniproject3.MainWindow;
+import miniproject3.SolutionDialog;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -35,13 +36,12 @@ public abstract class ColoringAlgorithm extends Thread {
     }
     protected void doAfter(){
         endTime = System.currentTimeMillis();
-        float elapsedTime = (endTime - startTime)/(float)1000;
-        final String message = String.format("Algorithme : %s - Temps écoulé : %.3f seconde%s%n", name, elapsedTime, elapsedTime > 1 ? "s" : "")
-        + (solution != null ? String.format("Solution trouvée : %s%n", Arrays.toString(solution)) : "Aucune solution trouvée");
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JOptionPane.showMessageDialog(parentWindow, message, "Résultat", JOptionPane.INFORMATION_MESSAGE);
+                String algorithm = parentWindow.getMethod();
+                float elapsedTime = (endTime - startTime)/(float)1000;
+                SolutionDialog solutionDialog = new SolutionDialog(parentWindow, "Solution", algorithm, elapsedTime, Arrays.toString(solution));
                 parentWindow.enableCalculationButton(true);
             }
         });
