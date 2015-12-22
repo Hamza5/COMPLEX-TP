@@ -102,3 +102,6 @@ crashlytics-build.properties
 
 # Text files
 *.txt
+
+# Include graph files
+!Graphe*.txt
