@@ -10,9 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class MainWindow extends JFrame implements ActionListener{
 
@@ -98,14 +95,17 @@ public class MainWindow extends JFrame implements ActionListener{
             try {
                 enableCalculationButton(false);
                 if (depthRadioButton.isSelected()){
-                        ColoringAlgorithm deepFirst = new DepthFirstColoringAlgorithm(getFileContent(graphFileTextField.getText()), getColors(), this);
+                        ColoringAlgorithm deepFirst = new DepthFirstColoringAlgorithm(Main.getFileContent(graphFileTextField.getText()), getColors(), this);
                         deepFirst.start();
                 } else {
-                    ColoringAlgorithm heuristic = new HeuristicColoringAlgorithm(getFileContent(graphFileTextField.getText()), getColors(), this);
+                    ColoringAlgorithm heuristic = new HeuristicColoringAlgorithm(Main.getFileContent(graphFileTextField.getText()), getColors(), this);
                     heuristic.start();
                 }
             } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(this, "Impossible de lire le fichier !\n"+e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                enableCalculationButton(true);
+            } catch (IndexOutOfBoundsException | NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Fichier invalide !\n"+ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                 enableCalculationButton(true);
             }
         } else if (graphFileButton.equals(actionEvent.getSource())){
@@ -115,22 +115,6 @@ public class MainWindow extends JFrame implements ActionListener{
                 graphFileTextField.setText(fileChooser.getSelectedFile().getAbsolutePath());
             }
         }
-    }
-
-    private int[][] getFileContent(String path) throws FileNotFoundException {
-        Scanner file = new Scanner(new FileReader(path));
-        ArrayList<String> lines = new ArrayList<>();
-        while (file.hasNextLine()){
-            lines.add(file.nextLine());
-        }
-        int[][] vertices = new int[lines.size()][lines.size()];
-        for (int i = 0; i < vertices.length; i++){
-            Scanner data = new Scanner(lines.get(i));
-            for (int j = 0; j < vertices[0].length && data.hasNextInt(); j++){
-                vertices[i][j] = data.nextInt();
-            }
-        }
-        return vertices;
     }
 
     private String[] getColors(){
