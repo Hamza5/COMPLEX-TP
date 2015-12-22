@@ -33,6 +33,7 @@ public class MainWindow extends JFrame implements ActionListener{
     private final JLabel colorsLabel;
     private final JRadioButton depthRadioButton;
     private final JRadioButton heuristicRadioButton;
+    private final JProgressBar solutionProgressBar;
 
     MainWindow(){
         super();
@@ -71,9 +72,20 @@ public class MainWindow extends JFrame implements ActionListener{
         choiceBox.add(heuristicRadioButton);
         calculateButton = new JButton(calculateText);
         calculateButton.addActionListener(this);
+        Box buttonBox = Box.createHorizontalBox();
+        buttonBox.add(Box.createHorizontalGlue());
+        buttonBox.add(calculateButton);
+        solutionProgressBar = new JProgressBar();
+        solutionProgressBar.setStringPainted(true);
+        solutionProgressBar.setString(null);
+        solutionProgressBar.setVisible(false);
+        Box progressBox = Box.createVerticalBox();
+        progressBox.add(solutionProgressBar);
+        progressBox.add(Box.createVerticalStrut(padding));
+        progressBox.add(buttonBox);
         calculationBox.add(choiceBox);
-        calculationBox.add(Box.createHorizontalGlue());
-        calculationBox.add(calculateButton);
+        calculationBox.add(Box.createHorizontalStrut(padding));
+        calculationBox.add(progressBox);
 
         Box mainBox = Box.createVerticalBox();
         mainBox.setBorder(BorderFactory.createEmptyBorder(padding, padding, padding, padding));
@@ -96,10 +108,10 @@ public class MainWindow extends JFrame implements ActionListener{
                 enableCalculationButton(false);
                 if (depthRadioButton.isSelected()){
                         ColoringAlgorithm deepFirst = new DepthFirstColoringAlgorithm(Main.getFileContent(graphFileTextField.getText()), getColors(), this);
-                        deepFirst.start();
+                        deepFirst.execute();
                 } else {
                     ColoringAlgorithm heuristic = new HeuristicColoringAlgorithm(Main.getFileContent(graphFileTextField.getText()), getColors(), this);
-                    heuristic.start();
+                    heuristic.execute();
                 }
             } catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(this, "Impossible de lire le fichier !\n"+e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -124,6 +136,7 @@ public class MainWindow extends JFrame implements ActionListener{
 
     public void enableCalculationButton(boolean enable){
         calculateButton.setEnabled(enable);
+        solutionProgressBar.setVisible(!enable);
         if (enable) this.setCursor(Cursor.getDefaultCursor());
         else this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     }
@@ -137,5 +150,9 @@ public class MainWindow extends JFrame implements ActionListener{
     public String getMethod(){
         if (depthRadioButton.isSelected()) return depthRadioButton.getText();
         else return heuristicRadioButton.getText();
+    }
+
+    public void setProgress(int progress){
+        solutionProgressBar.setValue(progress);
     }
 }

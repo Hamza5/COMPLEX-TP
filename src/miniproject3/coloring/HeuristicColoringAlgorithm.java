@@ -6,6 +6,7 @@ public class HeuristicColoringAlgorithm extends ColoringAlgorithm{
     public HeuristicColoringAlgorithm(int[][] matrix, String[] colorsNames, MainWindow window){
         super(matrix, colorsNames, window);
         name = "Recherche Heuristique";
+        max = (long) (Math.pow(colorsNames.length, matrix.length-1)+1);
     }
 
     @Override
@@ -28,6 +29,7 @@ public class HeuristicColoringAlgorithm extends ColoringAlgorithm{
             found = heuristic(verticesColors);
             if(found) solution = verticesColors;
         } else {
+            setProgress(Float.valueOf(++progress/(float)max*100).intValue());
             found = false;
             for (int i=0; i<colors.length && !found; i++){
                 String[] currentColors = new String[verticesColors.length+1];

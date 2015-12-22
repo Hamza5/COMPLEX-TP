@@ -7,6 +7,7 @@ public class DepthFirstColoringAlgorithm extends ColoringAlgorithm{
     public DepthFirstColoringAlgorithm(int[][] matrix, String[] colorsNames, MainWindow window){
         super(matrix, colorsNames, window);
         name = "Profondeur d'abord";
+        max = (long) (Math.pow(colorsNames.length, matrix.length-1));
     }
 
     @Override
@@ -28,6 +29,7 @@ public class DepthFirstColoringAlgorithm extends ColoringAlgorithm{
                 found = depthTree(currentColors);
             }
         }
+        setProgress(Float.valueOf(++progress/(float)max*100).intValue());
         return found;
     }
 }

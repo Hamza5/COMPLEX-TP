@@ -4,21 +4,27 @@ import miniproject3.MainWindow;
 import miniproject3.SolutionDialog;
 
 import javax.swing.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 
-public abstract class ColoringAlgorithm extends Thread {
+public abstract class ColoringAlgorithm extends SwingWorker<Void, Void> implements PropertyChangeListener{
     protected int[][] adjacency;
     protected String[] colors;
     protected String name;
     protected long startTime;
     protected long endTime;
     protected String[] solution;
+    protected long progress;
+    protected long max;
     private MainWindow parentWindow;
     public ColoringAlgorithm(int[][] matrix, String[] colorsNames, MainWindow window){
         super();
         adjacency = matrix;
         colors = colorsNames;
         parentWindow = window;
+        progress = 0;
+        addPropertyChangeListener(this);
     }
     protected boolean validate(String[] verticesColors){
         for (int i=0; i<adjacency.length-1; i++){
@@ -29,22 +35,14 @@ public abstract class ColoringAlgorithm extends Thread {
         return true;
     }
     @Override
-    public final void run(){
+    protected Void doInBackground(){
         doBefore();
         doOperation();
         doAfter();
+        return null;
     }
     protected void doAfter(){
         endTime = System.currentTimeMillis();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                String algorithm = parentWindow.getMethod();
-                float elapsedTime = (endTime - startTime)/(float)1000;
-                SolutionDialog solutionDialog = new SolutionDialog(parentWindow, "Solution", algorithm, elapsedTime, Arrays.toString(solution));
-                parentWindow.enableCalculationButton(true);
-            }
-        });
     }
     protected void doBefore(){
         startTime = System.currentTimeMillis();
@@ -53,5 +51,21 @@ public abstract class ColoringAlgorithm extends Thread {
     @Override
     public String toString(){
         return name;
+    }
+    @Override
+    protected void done(){
+        String algorithm = parentWindow.getMethod();
+        float elapsedTime = (endTime - startTime)/(float)1000;
+        SolutionDialog solutionDialog = new SolutionDialog(parentWindow, "Solution", algorithm, elapsedTime, solution != null ? Arrays.toString(solution) : "Aucune solution trouvée");
+        parentWindow.enableCalculationButton(true);
+    }
+    @Override
+    public void propertyChange(PropertyChangeEvent evt){
+        if (evt.getPropertyName().equals("progress")) {
+            int progress = (int)evt.getNewValue();
+            if ((int)evt.getOldValue() != progress) {
+                parentWindow.setProgress(progress);
+            }
+        }
     }
 }
