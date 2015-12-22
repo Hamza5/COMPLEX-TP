@@ -58,7 +58,7 @@ public class MainWindow extends JFrame implements ActionListener{
         colorsTextArea.setBorder(BorderFactory.createLoweredSoftBevelBorder());
         colorsBox.add(colorsLabel);
         colorsBox.add(Box.createHorizontalStrut(padding));
-        colorsBox.add(colorsTextArea);
+        colorsBox.add(new JScrollPane(colorsTextArea));
 
         depthRadioButton = new JRadioButton(depthText);
         heuristicRadioButton = new JRadioButton(heuristicText);
@@ -124,8 +124,8 @@ public class MainWindow extends JFrame implements ActionListener{
 
     public void enableCalculationButton(boolean enable){
         calculateButton.setEnabled(enable);
-        if (enable) calculateButton.setCursor(Cursor.getDefaultCursor());
-        else calculateButton.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if (enable) this.setCursor(Cursor.getDefaultCursor());
+        else this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
     }
 
     public void setDataAndCalculate(String graphFilePath, String colors){

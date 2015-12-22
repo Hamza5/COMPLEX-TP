@@ -34,7 +34,7 @@ public class SolutionDialog extends JDialog{
         Box solutionBox = Box.createHorizontalBox();
         solutionBox.add(solutionLabel);
         solutionBox.add(Box.createHorizontalStrut(5));
-        solutionBox.add(solutionTextArea);
+        solutionBox.add(new JScrollPane(solutionTextArea));
         mainBox.add(algorithmBox);
         mainBox.add(elapsedTimeBox);
         mainBox.add(solutionBox);
