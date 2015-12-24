@@ -2,11 +2,14 @@ package miniproject2.sort;
 
 import miniproject2.AlgorithmsProgressWindow;
 
+import java.util.Arrays;
+
 public class FusionSortAlgorithmItera extends SortAlgorithm {
 
     public FusionSortAlgorithmItera(int[] numbers, boolean worstCase, AlgorithmsProgressWindow progressWindow, int[] stopValues) {
         super(numbers, worstCase, progressWindow, stopValues);
         name = "Tri par fusion itératif";
+		this.numbers = new int[]{8,26,31,17,33,12,15,25,2,3,14,9,27,11,36,22,10,6,41,23};
     }
 	public  void TFusion(int[] Tab) {
  		if(Tab.length < 2) {return;}
@@ -45,8 +48,9 @@ public class FusionSortAlgorithmItera extends SortAlgorithm {
  		}
     @Override
     protected void doOperation() {
+        System.out.println(Arrays.toString(numbers));
     	TFusion(numbers);
-    	
+        System.out.println(Arrays.toString(numbers));
     }
 
 }
