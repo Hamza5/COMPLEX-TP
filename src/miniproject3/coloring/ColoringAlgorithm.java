@@ -24,6 +24,7 @@ public abstract class ColoringAlgorithm extends SwingWorker<Void, Void> implemen
         colors = colorsNames;
         parentWindow = window;
         progress = 0;
+        window.setProgress(0);
         addPropertyChangeListener(this);
     }
     protected boolean validate(String[] verticesColors){
